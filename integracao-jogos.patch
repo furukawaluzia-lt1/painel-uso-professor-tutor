@@ -1,0 +1,104 @@
+--- a/jogo_a.html
++++ b/jogo_a.html
+@@ -201,6 +201,7 @@
+     </footer>
+   </main>
+ 
++  <script src="tutor-tracker.js"></script>
+   <script src="shared.js"></script>
+   <script>
+     const TOTAL_ROUNDS = 8;
+@@ -288,6 +289,7 @@
+     }
+ 
+     function loadRound() {
++      window.TutorActivity?.begin(round + 1);
+       solved = false;
+       document.getElementById("btn-next").style.display = "none";
+ 
+@@ -346,6 +348,7 @@
+ 
+     function handleAnswer(value, btn) {
+       if (solved) return;
++      window.TutorActivity?.answer(value === numerator);
+ 
+       const mascotBox = document.getElementById("mascot-box");
+       const speech = document.getElementById("mascot-speech");
+--- a/jogo_b.html
++++ b/jogo_b.html
+@@ -215,6 +215,7 @@
+     </footer>
+   </main>
+ 
++  <script src="tutor-tracker.js"></script>
+   <script src="shared.js"></script>
+   <script>
+     const TOTAL_ROUNDS = 8;
+@@ -343,6 +344,7 @@
+     }
+ 
+     function loadRound() {
++      window.TutorActivity?.begin(currentRound + 1);
+       isSolved = false;
+       document.getElementById('btn-next').style.display = 'none';
+ 
+@@ -390,6 +392,7 @@
+ 
+     function handleChoice(option, btn, target) {
+       if (isSolved) return;
++      window.TutorActivity?.answer(option.isCorrect);
+ 
+       const mascotBox = document.getElementById('mascot-box');
+       const speech = document.getElementById('mascot-speech');
+--- a/jogo_c.html
++++ b/jogo_c.html
+@@ -484,6 +484,7 @@
+   <footer>Coleção Horizonte · Aprender é abrir caminhos. Continue investigando.</footer>
+ </main>
+ 
++<script src="tutor-tracker.js"></script>
+ <script>
+   // SISTEMA DE ÁUDIO SINTETIZADO
+   const AudioFX = (() => {
+@@ -616,6 +617,7 @@
+   }
+ 
+   function renderRound(focus = false) {
++    window.TutorActivity?.begin(round + 1);
+     solved = false;
+     $('next').hidden = true;
+     denominator = levels[round];
+@@ -648,6 +650,7 @@
+ 
+   function check(answer, button) {
+     if (solved) return;
++    window.TutorActivity?.answer(same(answer, { numerator, denominator }));
+     if (!same(answer, { numerator, denominator })) {
+       AudioFX.wrong();
+       button.classList.remove('wrong');
+--- a/jogo_d.html
++++ b/jogo_d.html
+@@ -258,6 +258,7 @@
+     </footer>
+   </main>
+ 
++  <script src="tutor-tracker.js"></script>
+   <script src="shared.js"></script>
+   <script>
+     const CHALLENGES = [
+@@ -371,6 +372,7 @@
+     }
+ 
+     function loadRound() {
++      window.TutorActivity?.begin(currentRound + 1);
+       isSolved = false;
+       document.getElementById('btn-next').style.display = 'none';
+       document.getElementById('step-by-step').style.display = 'none';
+@@ -421,6 +423,7 @@
+ 
+     function handleChoice(val, correctVal, btn, data) {
+       if (isSolved) return;
++      window.TutorActivity?.answer(val === correctVal);
+ 
+       const mascotBox = document.getElementById('mascot-box');
+       const speech = document.getElementById('mascot-speech');
